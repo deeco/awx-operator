@@ -222,6 +222,7 @@ spec:
           emptyDir: {}
 
 # AWX Service.
+{% if 'cluster' == tower_service_type|lower %}
 ---
 apiVersion: v1
 kind: Service
@@ -238,6 +239,24 @@ spec:
     name: http
   selector:
     app: awx
+{% endif %}
+
+{% if 'node' == tower_service_type|lower %}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: '{{ meta.name }}'
+  namespace: '{{ meta.namespace }}'
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      nodePort: 30920
+      name: http
+  selector:
+    app: awx
+{% endif %}
 
 # AWX Ingress.
 {% if 'ingress' == tower_ingress_type|lower %}

@@ -248,6 +248,8 @@ kind: Service
 metadata:
   name: '{{ meta.name }}'
   namespace: '{{ meta.namespace }}'
+  labels:
+    app: awx
 spec:
   type: NodePort
   ports:

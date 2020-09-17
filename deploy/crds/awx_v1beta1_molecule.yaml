@@ -7,6 +7,7 @@ metadata:
 spec:
   deployment_type: awx
   tower_ingress_type: ingress
+  tower_service_type: node
   tower_task_privileged: false
 
   tower_hostname: example-awx.test
